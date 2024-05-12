@@ -1,0 +1,37 @@
+Finding 'scf' for spin-up in LiCab
+&control
+	calculation = 'scf',
+	prefix = 'LiCaB'
+	outdir = '/home/lopzz/....../temp'
+	pseudo_dir = '/home/......./pseudo'
+/
+&system
+	ibrav = 2
+	celldm(1) = 11.3553064
+	nat = 3,
+	ntyp = 3,
+	ecutwfc = 15
+	ecutrho = 120
+ 	ocupations = 'smearing'
+	degauss = 0.002
+	nspin = 1			#this is particularly for up-spin, for down spin the value will be 2
+	starting_magnetization(1) = 0.5
+	starting_magnetization(2) = 0.5
+	starting_magnetization(3) = 0.5
+/
+&electrons
+	mixing_beta = 0.7
+	diagonalization = 'eg'
+/
+&ions
+/
+ATOMIC_SPECIES
+Li 	6.941 Li.pbe-s-rrkjus_psl.0.2.1.UPF
+Ca 	40.078 Ca.pbe-spn-rrkjus_psl.0.2.3.UPF
+B 	10.811 B.pbe-n-rrkjus_psl.0.1.UPF
+ATOMIC_POSITIONS(alat)
+B	0.25 	0.25	0.25
+Ca	0.00	0.00	0.00
+Li	0.50 	0.50	0.50
+k-POINTS (automatic)
+6	6	6	1	1	1
