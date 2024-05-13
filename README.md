@@ -3,10 +3,12 @@
 **Finding 'scf' for spin-up in LiCab
 
 **What is 'scf'?
+
 In Quantum ESPRESSO, a self-consistent field (SCF) calculation is a basic operation that minimizes a system's energy for a fixed geometry. SCF calculations are an iterative method that involves:
 >Selecting an approximate Hamiltonian
 >Solving the Schrödinger equation to get a more accurate set of orbitals
->Solving the Schrödinger equation again with the new orbitals until the results converge 
+>Solving the Schrödinger equation again with the new orbitals until the results converge
+
 SCF calculations can be performed for varying ionic positions, and the ground state energies can be plotted against those positions. A geometry relaxation is a series of SCF calculations, where the ionic position of the relaxed structure is given.
 To perform an SCF calculation for silicon using Quantum ESPRESSO, you need to provide various parameters in an input file. The default value for the calculation parameter is "scf". 
 The PWscf (Plane-Wave Self-Consistent Field) package is a core component of the Quantum ESPRESSO distribution that performs many different kinds of self-consistent calculations. These calculations include:
