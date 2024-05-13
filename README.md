@@ -1,58 +1,58 @@
 # Quantum-Espresso-codes
 
-**Finding 'scf' for spin-up in LiCab
+# Finding 'scf' for spin-up in LiCab
 
-**What is 'scf'?
+## What is 'scf'?
 
-In Quantum ESPRESSO, a self-consistent field (SCF) calculation is a basic operation that minimizes a system's energy for a fixed geometry. SCF calculations are an iterative method that involves:
->Selecting an approximate Hamiltonian
->Solving the Schrödinger equation to get a more accurate set of orbitals
->Solving the Schrödinger equation again with the new orbitals until the results converge
+In Quantum ESPRESSO, a self-consistent field (SCF) calculation is a basic operation that minimizes a system's energy for a fixed geometry. SCF calculations are an iterative method that involves:        
+>Selecting an approximate Hamiltonian        \
+>Solving the Schrödinger equation to get a more accurate set of orbitals        \
+>Solving the Schrödinger equation again with the new orbitals until the results converge        
 
 SCF calculations can be performed for varying ionic positions, and the ground state energies can be plotted against those positions. A geometry relaxation is a series of SCF calculations, where the ionic position of the relaxed structure is given.
 To perform an SCF calculation for silicon using Quantum ESPRESSO, you need to provide various parameters in an input file. The default value for the calculation parameter is "scf". 
-The PWscf (Plane-Wave Self-Consistent Field) package is a core component of the Quantum ESPRESSO distribution that performs many different kinds of self-consistent calculations. These calculations include:
->Ground-state energy
->One-electron (Kohn-Sham) orbitals
->Atomic forces
->Stresses
->Polarization
->Effective Screening Medium (ESM) method
+The PWscf (Plane-Wave Self-Consistent Field) package is a core component of the Quantum ESPRESSO distribution that performs many different kinds of self-consistent calculations. These calculations include: 
+>Ground-state energy \
+>One-electron (Kohn-Sham) orbitals\
+>Atomic forces \
+Stresses \
+Polarization\
+Effective Screening Medium (ESM) method
 
 
-&control
-	calculation = 'scf',
-	prefix = 'LiCaB'
-	outdir = '/home/lopzz/....../temp'
-	pseudo_dir = '/home/......./pseudo'
-/
-&system
-	ibrav = 2			#ibrav: Bravais lattice index
-	celldm(1) = 11.3553064
-	nat = 3,			#nat: no. of atoms
-	ntyp = 3,			#ntyp: no. of types of atoms
-	ecutwfc = 15			#ecutwfc: K.E, cutoff (Ry) for wavefunction
-	ecutrho = 120			#ecutrho: K.E, cutoff (Ry) for charge density & potential
- 	ocupations = 'smearing'
-	degauss = 0.002
-	nspin = 1			#this is particularly for up-spin, for down spin the value will be 2
-	starting_magnetization(1) = 0.5
-	starting_magnetization(2) = 0.5
-	starting_magnetization(3) = 0.5
-/
-&electrons
-	mixing_beta = 0.7		#mixing_beta: mixing factor for self-consistency
-	diagonalization = 'eg'		#eg: conjugate gradient-like band-by-band diagonalization
-/
-&ions
-/
-ATOMIC_SPECIES
-Li 	6.941 Li.pbe-s-rrkjus_psl.0.2.1.UPF
-Ca 	40.078 Ca.pbe-spn-rrkjus_psl.0.2.3.UPF
-B 	10.811 B.pbe-n-rrkjus_psl.0.1.UPF
-ATOMIC_POSITIONS(alat)			#alat: atomic position are in cartesian coordinates in units of cell parameters
-B	0.25 	0.25	0.25
-Ca	0.00	0.00	0.00
-Li	0.50 	0.50	0.50
-k-POINTS (automatic)			#automatic: automatically generated uniform grid of k-points
-6	6	6	1	1	1
+&control        \
+	calculation = 'scf',        \
+	prefix = 'LiCaB'        \
+	outdir = '/home/lopzz/....../temp'        \
+	pseudo_dir = '/home/......./pseudo'        \
+/        \
+&system        \
+	ibrav = 2			#ibrav: Bravais lattice index        \
+	celldm(1) = 11.3553064        \
+	nat = 3,			#nat: no. of atoms        \
+	ntyp = 3,			#ntyp: no. of types of atoms        \
+	ecutwfc = 15			#ecutwfc: K.E, cutoff (Ry) for wavefunction        \
+	ecutrho = 120			#ecutrho: K.E, cutoff (Ry) for charge density & potential        \
+ 	ocupations = 'smearing'        \
+	degauss = 0.002        \
+	nspin = 1			#this is particularly for up-spin, for down spin the value will be 2        \
+	starting_magnetization(1) = 0.5        \
+	starting_magnetization(2) = 0.5        \
+	starting_magnetization(3) = 0.5        \
+/        \
+&electrons        \
+	mixing_beta = 0.7		#mixing_beta: mixing factor for self-consistency        \
+	diagonalization = 'eg'		#eg: conjugate gradient-like band-by-band diagonalization        \
+/        \
+&ions        \
+/        \
+ATOMIC_SPECIES        \
+Li 	6.941 Li.pbe-s-rrkjus_psl.0.2.1.UPF        \
+Ca 	40.078 Ca.pbe-spn-rrkjus_psl.0.2.3.UPF        \
+B 	10.811 B.pbe-n-rrkjus_psl.0.1.UPF        \
+ATOMIC_POSITIONS(alat)			#alat: atomic position are in cartesian coordinates in units of cell parameters        \
+B	0.25 	0.25	0.25        \
+Ca	0.00	0.00	0.00        \
+Li	0.50 	0.50	0.50        \
+k-POINTS (automatic)			#automatic: automatically generated uniform grid of k-points        \
+6	6	6	1	1	1        
