@@ -114,4 +114,93 @@ EOF
 done									
 ```
 
-##
+## k-Points
+
+```
+#1/bin/sh					
+NAME= 'LiCaB_nk'				
+for LiCaB_nk in 4 6 8 10 12 14 16 18
+do						
+cat > $NAME.$LiCaB_nk.in << EOF		
+&control					
+	calculation = 'scf'			
+ 	prefix = 'LiCaB_nk'			
+  	outdir = '/home/lopazz/Desktop/MSc_Project_2022/temp'
+   	pseudo_dir = '/home/lopazz/quantum_espresso/pseudo'	
+/								
+&system								
+	ibrav = 2,						
+ 	celldm(1) = 11.33,					
+  	nat = 3,							
+   	ntyp = 3,						
+    	ecutwfc = 15					
+     	ecutrho = 120						
+/								
+&electrons							
+	mixing_beta = 0.7					
+ 	diagonalization = 'cg'					
+/
+ATOMIC_SPECIES 	
+Li 	6.941 Li.pbe-s-rrkjus_psl.0.2.1.UPF        
+Ca 	40.078 Ca.pbe-spn-rrkjus_psl.0.2.3.UPF     
+B 	10.811 B.pbe-n-rrkjus_psl.0.1.UPF        
+ATOMIC_POSITIONS(alat)				
+B	0.25 	0.25	0.25        
+Ca	0.00	0.00	0.00        
+Li	0.50 	0.50	0.50        
+k-POINTS(automatic)		
+$LiCab_nk	$LiCaB_nk	$LiCaB	1	1	1		
+EOF							
+~/espresso-5.2.0/bin/pw.x<$NAME.$LiCaB_nk.in>$NAME.$LiCaB_nk.out	
+done									
+```
+Run the file 
+```
+./LiCaB_nk.sh &
+```
+
+## Calculation of lattice constant
+
+```
+#1/bin/sh					
+NAME= 'LiCaB_alat'				
+for LiCaB_alat in 11.0 11.2 11.4 11.6 11.8 12.0 	
+do						
+cat > $NAME.$LiCaB_alat.in << EOF		
+&control					
+	calculation = 'scf'			
+ 	prefix = 'LiCaB_alat'			
+  	outdir = '/home/lopazz/Desktop/MSc_Project_2022/temp'
+   	pseudo_dir = '/home/lopazz/quantum_espresso/pseudo'	
+/								
+&system								
+	ibrav = 2,						
+ 	celldm(1) = $LiCaB_alat,					
+  	nat = 3,							
+   	ntyp = 3,						
+    	ecutwfc = 15				
+     	ecutrho = 120						
+/								
+&electrons							
+	mixing_beta = 0.7					
+ 	diagonalization = 'cg'					
+/
+ATOMIC_SPECIES	
+Li 	6.941 Li.pbe-s-rrkjus_psl.0.2.1.UPF        
+Ca 	40.078 Ca.pbe-spn-rrkjus_psl.0.2.3.UPF     
+B 	10.811 B.pbe-n-rrkjus_psl.0.1.UPF        
+ATOMIC_POSITIONS(alat)				
+B	0.25 	0.25	0.25        
+Ca	0.00	0.00	0.00        
+Li	0.50 	0.50	0.50        
+k-POINTS(automatic)		
+10	10	10	1	1	1		
+EOF							
+~/espresso-5.2.0/bin/pw.x<$NAME.$LiCaB_alat.in>$NAME.$LiCaB_alat.out	
+done
+```
+Run the file 
+```
+
+```
+The value of lattice constant = 6.3499 Å
