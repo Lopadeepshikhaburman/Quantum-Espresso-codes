@@ -5,7 +5,11 @@
 1 Angstorm = 1.88971616463 Bohr		\
 1 Bohr = 0.529177249 Angstorm = 1 a.u	\
 1 Ry = 13.6046981 eV			\
-1 eV = 1.60217733 x 10^-19 J
+1 eV = 1.60217733 x 10^-19 J		
+
+> https://www.quantum-espresso.org/Doc/pw_user_guide/			\
+> https://www.quantum-espresso.org/Doc/INPUT_PW.html			\
+> https://www.materialscloud.org/work/tools/qeinputgenerator
 
 ## Finding 'scf' for spin-up in LiCab
 
@@ -201,6 +205,18 @@ done
 ```
 Run the file 
 ```
-
+./LiCaB_alat*.out > LiCaB_alat.dat
+```
+```
+grep! LiCaB_alat.dat
+```
+```
+vi LiCaB_alat.dat
+```
+```
+~/espresso-5.2.0/bin/ev.x
 ```
 The value of lattice constant = 6.3499 Å
+
+## Magnetization and spin-orbit interaction
+
