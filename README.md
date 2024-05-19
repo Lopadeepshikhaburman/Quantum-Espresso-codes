@@ -258,7 +258,13 @@ Li	0.50 	0.50	0.50
 k-POINTS (automatic)			#automatic: automatically generated uniform grid of k-points        
 6	6	6	1	1	1        
 ```
-### Isotopic strain
+## Isotopic strain
+
+|    Tensile	    |   Compressive     |
+| -------------     | -------------     |
+|increases in length|decreases in length|
+
+&#916 a
 
 ## Dielectric constant
 
