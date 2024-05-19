@@ -258,6 +258,7 @@ Li	0.50 	0.50	0.50
 k-POINTS (automatic)			#automatic: automatically generated uniform grid of k-points        
 6	6	6	1	1	1        
 ```
+### Isotopic strain
 
 ## Dielectric constant
 
@@ -266,6 +267,99 @@ intersmear - It is the broadening for interband transitions. If it is too small,
 intrasmear - It is the broadening parameter for the intraband i.e, metal Drude- like term (in eV)
 
 > https://pranabdas.github.io/espresso/assets/files/eps_man-ab3fac19eb366509dd129c37fbf94ac0.pdf
+
+### Calculating ecut for dielectric  
+
+The file name LiCaB_ecut_optical.sh is created
+
+```
+#1/bin/sh					
+NAME= 'ecut_LiCaB_optical'				
+for ecut_LiCaB in 5 10 15 20 25 30 35 40 	
+do						
+cat > $NAME.$ecut_LiCaB_optical.in << EOF		
+&control					
+	calculation = 'scf'			
+ 	prefix = 'LiCaB_ecut_optical'			
+  	outdir = '/home/lopazz/Desktop/MSc_Project_2022/temp'
+   	pseudo_dir = '/home/lopazz/quantum_espresso/pseudo'	
+/								
+&system								
+	ibrav = 2,						
+ 	celldm(1) = 11.33,					
+  	nat = 3,							
+   	ntyp = 3,						
+    	ecutwfc = $ecut_LiCab					
+     	ecutrho = 320						
+/								
+&electrons							
+	mixing_beta = 0.7					
+ 	diagonalization = 'cg'					
+/
+ATOMIC_SPECIES	
+Li 	6.941 Li.upf
+Ca 	40.078 Ca.upf
+B	10.811 B.upf
+
+      
+ATOMIC_POSITIONS(alat)				
+B	0.25 	0.25	0.25        
+Ca	0.00	0.00	0.00        
+Li	0.50 	0.50	0.50        
+k-POINTS(automatic)		
+10	10	10	1	1	1		
+EOF							
+~/espresso-5.2.0/bin/pw.x<$NAME.$ecut_LiCaB_optical.in>$NAME.$ecut_LiCaB_optical.out	
+done
+```
+
+Run the following code:
+
+```
+./LiCaB_ecut_optical.sh
+```
+
+### Calculating lattice constant 
+
+```
+#1/bin/sh					
+NAME= 'LiCaB_alat_optical'				
+for LiCaB_alat_optical in 11.0 11.2 11.4 11.6 11.8 12.0 	
+do						
+cat > $NAME.$LiCaB_alat_optical.in << EOF		
+&control					
+	calculation = 'scf'			
+ 	prefix = 'LiCaB_alat_optical'			
+  	outdir = '/home/lopazz/Desktop/MSc_Project_2022/temp'
+   	pseudo_dir = '/home/lopazz/quantum_espresso/pseudo'	
+/								
+&system								
+	ibrav = 2,						
+ 	celldm(1) = $LiCaB_alat_optical,					
+  	nat = 3,							
+   	ntyp = 3,						
+    	ecutwfc = 15				
+     	ecutrho = 120						
+/								
+&electrons							
+	mixing_beta = 0.7					
+ 	diagonalization = 'cg'					
+/
+ATOMIC_SPECIES	
+Li 	6.941 Li.upf
+Ca 	40.078 Ca.upf
+B	10.811 B.upf
+        
+ATOMIC_POSITIONS(alat)				
+B	0.25 	0.25	0.25        
+Ca	0.00	0.00	0.00        
+Li	0.50 	0.50	0.50        
+k-POINTS(automatic)		
+10	10	10	1	1	1		
+EOF							
+~/espresso-5.2.0/bin/pw.x<$NAME.$LiCaB_alat_optical.in>$NAME.$LiCaB_alat_optical.out	
+done
+```
 
 ### Interband
 
@@ -277,7 +371,7 @@ OUTPUT FILE
 ### Intraband
 
 
-INPUT FILE
+INPUT FILE (for dielectric function w.r.t intraband transition)
 ```
 &inputpp
     calculation = 'eps',
