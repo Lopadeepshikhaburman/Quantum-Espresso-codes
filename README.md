@@ -390,11 +390,15 @@ INPUT FILE
     shift = 0.0d0
  /
 ```
+General code;
+```
+~/espresso-5.2.0/bin/epsilon.x <input file name> output file name &
+```
+Run the following code
+```
+~/espresso-5.2.0/bin/epsilon.x <LiCaB_eps.in> LiCaB_eps.out &
+```
 OUTPUT FILE
-
-```
-
-```
 12 files will be created, namely -  deels, depsi, depsr, dieps, eels epsi, epsr, ieps, ueels, uepsi, uepsr, and uieps. The initial letter 'd' stands for down spin and 'u' stands for up spin. The final letter 'i' stands for imaginary and 'r' for real part of dielectric function.
 
 ### Intraband
