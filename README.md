@@ -264,7 +264,7 @@ k-POINTS (automatic)			#automatic: automatically generated uniform grid of k-poi
 | -------------     | -------------     |
 |increases in length|decreases in length|
 
-&#916 a
+\ delta 
 
 ## Dielectric constant
 
@@ -274,7 +274,7 @@ intrasmear - It is the broadening parameter for the intraband i.e, metal Drude- 
 
 > https://pranabdas.github.io/espresso/assets/files/eps_man-ab3fac19eb366509dd129c37fbf94ac0.pdf
 
-### Calculating ecut for dielectric  
+### Calculating ecut for dielectric function
 
 The file name LiCaB_ecut_optical.sh is created
 
@@ -325,7 +325,7 @@ Run the following code:
 ./LiCaB_ecut_optical.sh
 ```
 
-### Calculating lattice constant 
+### Calculating lattice constant for dielectric function
 
 ```
 #1/bin/sh					
@@ -366,13 +366,36 @@ EOF
 ~/espresso-5.2.0/bin/pw.x<$NAME.$LiCaB_alat_optical.in>$NAME.$LiCaB_alat_optical.out	
 done
 ```
+Run the following code:
 
+```
+./LiCaB_alat_optical.sh
+```
 ### Interband
 
 INPUT FILE
-
+```
+&inputpp
+    calculation = 'eps',
+    prefix = 'LiCaB_eps'
+    outdir = '/home/lopazz/Desktop/MSc_Project_2022/temp'
+ /
+ &energy_grid
+    smeartype = 'gauss'
+    intersmear = 0.136d0
+    intrasmear = 0.0d0
+    wmax = 30.0d0
+    wmin = 0.0d0
+    nw = 600
+    shift = 0.0d0
+ /
+```
 OUTPUT FILE
 
+```
+
+```
+12 files will be created, namely -  deels, depsi, depsr, dieps, eels epsi, epsr, ieps, ueels, uepsi, uepsr, and uieps. The initial letter 'd' stands for down spin and 'u' stands for up spin. The final letter 'i' stands for imaginary and 'r' for real part of dielectric function.
 
 ### Intraband
 
